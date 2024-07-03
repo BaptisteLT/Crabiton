@@ -1,0 +1,22 @@
+
+#authentication_modal_wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px 0px;
+}
+
+#authentication_modal {
+  background: white;
+  padding: 50px;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+
+#authentication_modal > form {
+  display: flex;
+  flex-direction: column;
+}
