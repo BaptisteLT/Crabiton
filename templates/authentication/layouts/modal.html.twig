@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('styles/authentication/authentication_modal.scss') }}">
+    <link rel="stylesheet" href="{{ asset('styles/authentication/authentication_modal.css') }}">
 {% endblock %}
 
 {% block body %}
     <div id="authentication_modal_wrapper">
         <div id="authentication_modal">
-            <h1>
+            <h1 class="authenticate-h1">
                 {% if '/register' in app.request.pathinfo %}
                     Register
                 {% else %}
-                    Login
+                    Sign in
                 {% endif %}
             </h1>
 
@@ -20,9 +20,9 @@
             {% endblock %}
 
             {% if '/register' in app.request.pathinfo %}
-                <a href="{{ path('app_login') }}">I have an account</a>
+                <a class="authentication-href" href="{{ path('app_login') }}">I have an account</a>
             {% else %}
-                <a href="{{ path('app_register') }}">Create an account</a>
+                <a class="authentication-href" href="{{ path('app_register') }}">Create an account</a>
             {% endif %}
         </div>
     </div>
