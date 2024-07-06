@@ -36,18 +36,17 @@
 
 /*BTN*/
 .authenticate-btn {
-  background: #3cb0fd;
+  background: $custom_blue;
   font-family: Arial;
   color: #ffffff;
   font-size: 20px;
   padding: 10px 5px;
   text-decoration: none;
   border: 0px;
-  margin-bottom: 20px;
   cursor: pointer;
 
   &:hover {
-    background: #52baff;
+    background: $custom_blue_lighter;
     text-decoration: none;
   }
 }
@@ -63,7 +62,7 @@
     border: 0px;
     border:1px solid transparent;
     padding: 10px 5px;
-    border-bottom: 2px solid #B8B8BA;
+    border-bottom: 2px solid $custom_gray;
 
     &:focus{
       outline: none !important;
@@ -74,5 +73,29 @@
 
 .authentication-href
 {
-  color: $authgray;
+  color: $custom_gray;
+}
+
+.oauth_button {
+  display: flex;
+  background: #F0F0F0;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 5px;
+  font-size: 20px;
+  cursor: pointer;
+  border: 0;
+  font-weight: normal;
+  color: black;
+  text-decoration: none;
+
+  &:hover{
+    background: #e7e7e7;
+  }
+
+  img {
+    height: 23px;
+  }
 }

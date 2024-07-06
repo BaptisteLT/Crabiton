@@ -1,5 +1,7 @@
 {% extends 'base.html.twig' %}
 
+{% import 'authentication/layouts/oauth_button.html.twig' as oauth_button %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('styles/authentication/authentication_modal.css') }}">
 {% endblock %}
@@ -18,6 +20,8 @@
             {% block modal_content %}
 
             {% endblock %}
+
+            {{ oauth_button.oauth_button('images/logo/google-logo.png', 'Google Logo', 'Sign up with Google', 'connect_google_start') }}
 
             {% if '/register' in app.request.pathinfo %}
                 <a class="authentication-href" href="{{ path('app_login') }}">I have an account</a>

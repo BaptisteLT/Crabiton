@@ -1,0 +1,18 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/layouts/header.css') }}">
+{% endblock %}
+
+<div id="header">
+    <div>
+        <a href="{{ path('app_index') }}">Crabiton</a>
+    </div>
+
+    <div>
+        {% if app.user is null %}
+            <a href="{{ path('app_login') }}">Sign in</a>
+            <a href="{{ path('app_register') }}">Register</a>
+        {% else %}
+            <a href="{{ path('app_logout') }}">Log out</a>
+        {% endif %}
+    </div>
+</div>

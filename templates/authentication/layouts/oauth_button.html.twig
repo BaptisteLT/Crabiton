@@ -1,0 +1,6 @@
+{% macro oauth_button(imageUrl, altText, buttonText, routeName) %}
+    <a href="{{ path(routeName) }}" class="oauth_button">
+        <img src="{{ asset(imageUrl) }}" alt="{{ altText }}">
+        <span>{{ buttonText }}</span>
+    </a>
+{% endmacro %}

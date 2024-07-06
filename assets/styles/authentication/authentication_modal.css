@@ -39,7 +39,6 @@
   padding: 10px 5px;
   text-decoration: none;
   border: 0px;
-  margin-bottom: 20px;
   cursor: pointer;
 }
 .authenticate-btn:hover {
@@ -66,4 +65,26 @@
 
 .authentication-href {
   color: #B8B8BA;
+}
+
+.oauth_button {
+  display: flex;
+  background: #F0F0F0;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px 5px;
+  font-size: 20px;
+  cursor: pointer;
+  border: 0;
+  font-weight: normal;
+  color: black;
+  text-decoration: none;
+}
+.oauth_button:hover {
+  background: #e7e7e7;
+}
+.oauth_button img {
+  height: 23px;
 }
