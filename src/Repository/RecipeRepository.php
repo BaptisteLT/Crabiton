@@ -16,20 +16,16 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-    //    /**
-    //     * @return Recipe[] Returns an array of Recipe objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('r')
-    //            ->andWhere('r.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('r.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+       public function findAllWithRating()
+       {
+            return $this->createQueryBuilder('r')
+                ->addSelect('avg(comments.rating) as avg_rating')
+                ->groupBy('r.id')
+                ->leftJoin('r.comments', 'comments')
+                ->orderBy('r.id', 'ASC')
+                ->getQuery();
+           ;
+       }
 
     //    public function findOneBySomeField($value): ?Recipe
     //    {

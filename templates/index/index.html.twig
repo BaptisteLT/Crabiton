@@ -2,6 +2,10 @@
 
 {% block title %}Hello IndexController!{% endblock %}
 
+{% block stylesheets %}
+    {{ knp_pagination_rel_links(pagination) }}
+{% endblock %}
+
 {% block body %}
 <style>
     .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
@@ -9,12 +13,31 @@
 </style>
 
 <div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {# total items count #}
+    <div class="count">
+        {{ pagination.getTotalItemCount }}
+    </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/crabiton/src/Controller/IndexController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/crabiton/templates/index/index.html.twig</code></li>
-    </ul>
+    <table>
+
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'r.id') }}</th>
+            <th{% if pagination.isSorted('a.name') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(pagination, 'Name', 'r.name') }}
+            </th>
+        </tr>
+
+        {% for recipe in pagination %}
+            <tr>
+                <td>{{ recipe[0].id }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 </div>
 {% endblock %}
