@@ -5,6 +5,7 @@ ini_set('memory_limit', '2560M');
 
 use App\Entity\Recipe;
 use App\Entity\Comment;
+use App\Entity\RecipeIngredients;
 use App\DataFixtures\MealTypeFixtures;
 use Doctrine\Persistence\ObjectManager;
 use App\DataFixtures\Factory\UserFactory;
@@ -13,7 +14,7 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 class RecipeFixtures extends AbstractFixtures implements DependentFixtureInterface
 {
     public function __construct(private UserFactory $userFactory){
-        parent::__construct(); // Ensure parent constructor is called
+        parent::__construct();
     }
 
     public function load(ObjectManager $manager): void
@@ -27,7 +28,29 @@ class RecipeFixtures extends AbstractFixtures implements DependentFixtureInterfa
             $recipe->setPreparationTimeInSeconds($this->faker->numberBetween(600,6000));
             $recipe->setPeopleNumber($this->faker->numberBetween(1,6));
             $recipe->setMealType($this->getReference($this->faker->randomElement(MealTypeFixtures::MEAL_TYPES)));
-    
+            
+
+            $ingredientsNumber = random_int(3,8);
+            for($x = 0; $x < $ingredientsNumber; $x++)
+            {
+                $recipeIngredients = new RecipeIngredients();
+                $recipeIngredients->setIngredient($this->getReference(IngredientFixtures::INGREDIENT_REFERENCE.random_int(0, IngredientFixtures::INGREDIENT_NUMBER)))
+                                  ->setRecipe($recipe);
+
+                //C'est soit l'un soit l'autre
+                if($this->faker->boolean(50))
+                {
+                    $recipeIngredients->setQuantityMiligram(random_int(10000,200000));
+                }
+                else
+                {
+                    $recipeIngredients->setQuantityNumber(random_int(1,2));
+                }
+
+                $manager->persist($recipeIngredients);
+            }
+            
+
             
             $manager->persist($recipe);
     
