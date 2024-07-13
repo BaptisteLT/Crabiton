@@ -5,7 +5,6 @@ namespace App\DataFixtures;
 use App\Entity\Ingredient;
 use App\DataFixtures\AllergenFixtures;
 use Doctrine\Persistence\ObjectManager;
-use App\DataFixtures\Factory\AbstractFactory;
 
 class IngredientFixtures extends AbstractFixtures
 {

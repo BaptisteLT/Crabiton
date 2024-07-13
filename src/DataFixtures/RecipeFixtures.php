@@ -3,6 +3,7 @@ namespace App\DataFixtures;
 
 ini_set('memory_limit', '2560M');
 
+use App\Entity\Step;
 use App\Entity\Recipe;
 use App\Entity\Comment;
 use App\Entity\RecipeIngredients;
@@ -31,6 +32,7 @@ class RecipeFixtures extends AbstractFixtures implements DependentFixtureInterfa
             
 
             $ingredientsNumber = random_int(3,8);
+            //Ajout des ingrédients à la recette
             for($x = 0; $x < $ingredientsNumber; $x++)
             {
                 $recipeIngredients = new RecipeIngredients();
@@ -38,19 +40,10 @@ class RecipeFixtures extends AbstractFixtures implements DependentFixtureInterfa
                                   ->setRecipe($recipe);
 
                 //C'est soit l'un soit l'autre
-                if($this->faker->boolean(50))
-                {
-                    $recipeIngredients->setQuantityMiligram(random_int(10000,200000));
-                }
-                else
-                {
-                    $recipeIngredients->setQuantityNumber(random_int(1,2));
-                }
+                $this->faker->boolean(50) ? $recipeIngredients->setQuantityMiligram(random_int(10000,200000)) : $recipeIngredients->setQuantityNumber(random_int(1,2));
 
                 $manager->persist($recipeIngredients);
             }
-            
-
             
             $manager->persist($recipe);
     
@@ -68,6 +61,17 @@ class RecipeFixtures extends AbstractFixtures implements DependentFixtureInterfa
                 $manager->persist($comment);
             }
 
+            $stepsNumber = random_int(2,6);
+            //Ajout des étapes de la recette
+            for($k = 0; $k<=$stepsNumber; $k++)
+            {
+                $step = new Step();
+                $step->setRecipe($recipe);
+                $step->setText($this->faker->text());
+                $step->setStepNumber($k);
+
+                $manager->persist($step);
+            }
         }
 
         $manager->flush();

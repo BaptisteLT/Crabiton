@@ -26,9 +26,7 @@ class MealTypeFixtures extends AbstractFixtures
             $this->addReference($meal, $mealType);
 
             $manager->persist($mealType);
-
         }
-
 
         $manager->flush();
     }
