@@ -1,20 +1,52 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello RecipeController!{% endblock %}
+{% block title %}Welcome to crabiton!{% endblock %}
+
+{% block stylesheets %}
+    {{ knp_pagination_rel_links(pagination) }}
+    <link rel="stylesheet" href="{{ asset('styles/recipe/index.css') }}">
+{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="container">
+    {# total items count #}
+    <div class="count">
+        {{ pagination.getTotalItemCount }}
+    </div>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <table>
+        <tr>
+            {# sorting of properties based on query components #}
+            <th>{{ knp_pagination_sortable(pagination, 'Id', 'r.id') }}</th>
+            <th{% if pagination.isSorted('a.name') %} class="sorted"{% endif %}>
+                {{ knp_pagination_sortable(pagination, 'Name', 'r.name') }}
+            </th>
+        </tr>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>C:/wamp64/www/crabiton/src/Controller/RecipeController.php</code></li>
-        <li>Your template at <code>C:/wamp64/www/crabiton/templates/recipe/index.html.twig</code></li>
-    </ul>
+        
+    </table>
+
+    <div id="recipe_wrapper">
+        {% for recipe in pagination %}
+            <div class="recipe" style="background-image: url('{{ recipe[0].recipeImage[0] is defined ? recipe[0].recipeImage[0] : 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg' }}')">
+                
+                <div class="recipe-like">
+                    Like
+                </div>
+                
+                <div class="recipe-content">
+                    <span>{{ recipe[0].name }}</span>
+                    <div>{{ recipe['avg_rating'] }}</div>
+                    <div>{{ recipe['count_rating'] }}</div>
+                </div>
+                
+            </div>
+        {% endfor %}
+    </div>
+
+    {# display navigation #}
+    <div class="navigation">
+        {{ knp_pagination_render(pagination) }}
+    </div>
 </div>
 {% endblock %}

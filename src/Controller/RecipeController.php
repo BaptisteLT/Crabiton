@@ -6,7 +6,9 @@ use App\Entity\Recipe;
 use App\Form\RecipeType;
 use App\Entity\RecipeImage;
 use Psr\Log\LoggerInterface;
+use App\Repository\RecipeRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
@@ -17,14 +19,17 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class RecipeController extends AbstractController
 {
-    #[Route('/recipe', name: 'app_recipe')]
-    public function index(): Response
+    #[Route('/', name: 'app_index')]
+    public function index(RecipeRepository $recipeRepository, PaginatorInterface $paginator, Request $request): Response
     {
-
-
+        $pagination = $paginator->paginate(
+            $recipeRepository->findAllWithRating(), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/
+            9 /*limit per page*/
+        );
 
         return $this->render('recipe/index.html.twig', [
-            'controller_name' => 'RecipeController',
+            'pagination' => $pagination,
         ]);
     }
 

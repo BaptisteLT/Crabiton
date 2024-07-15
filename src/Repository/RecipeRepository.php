@@ -20,6 +20,7 @@ class RecipeRepository extends ServiceEntityRepository
        {
             return $this->createQueryBuilder('r')
                 ->addSelect('avg(comments.rating) as avg_rating')
+                ->addSelect('count(comments.rating) as count_rating')
                 ->groupBy('r.id')
                 ->leftJoin('r.comments', 'comments')
                 ->orderBy('r.id', 'ASC')

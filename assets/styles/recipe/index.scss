@@ -1,0 +1,32 @@
+#recipe_wrapper
+{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+
+    @media (max-width: 800px) {
+        grid-template-columns: repeat(2, 1fr); // Changes to two equal columns for smaller screens
+    }
+
+    .recipe
+    {
+        background-size: cover;
+        aspect-ratio: 1;
+        border-radius: 15px;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .recipe-like
+    {
+        display: flex;
+        justify-content: end;
+    }
+}
+
+
+
