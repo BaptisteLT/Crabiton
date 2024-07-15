@@ -10,11 +10,14 @@ body, html {
 }
 
 body {
-  background: white;
+  background: #EFEFEF;
 }
 
 .container {
   margin: 1em auto;
   max-width: 1120px;
   width: 95%;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
 }

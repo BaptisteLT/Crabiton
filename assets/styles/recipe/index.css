@@ -19,6 +19,18 @@
   flex-direction: column;
   padding: 20px;
 }
+#recipe_wrapper .recipe .recipe-content {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.6);
+  width: fit-content;
+}
+#recipe_wrapper .recipe .recipe-content span:nth-of-type(1) {
+  font-weight: bold;
+}
+#recipe_wrapper .recipe .recipe-content a:nth-of-type(1) {
+  color: white;
+}
 #recipe_wrapper .recipe-like {
   display: flex;
   justify-content: end;
