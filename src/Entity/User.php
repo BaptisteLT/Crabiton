@@ -66,11 +66,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $OAuth2ProviderId = null;
 
+    /**
+     * @var Collection<int, UserFavoriteRecipe>
+     */
+    #[ORM\OneToMany(targetEntity: UserFavoriteRecipe::class, mappedBy: 'user', orphanRemoval: true)]
+    private Collection $userFavoriteRecipes;
+
     public function __construct()
     {
         $this->recipes = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->likes = new ArrayCollection();
+        $this->userFavoriteRecipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -276,6 +283,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setOAuth2ProviderId(?string $OAuth2ProviderId): static
     {
         $this->OAuth2ProviderId = $OAuth2ProviderId;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserFavoriteRecipe>
+     */
+    public function getUserFavoriteRecipes(): Collection
+    {
+        return $this->userFavoriteRecipes;
+    }
+
+    public function addUserFavoriteRecipe(UserFavoriteRecipe $userFavoriteRecipe): static
+    {
+        if (!$this->userFavoriteRecipes->contains($userFavoriteRecipe)) {
+            $this->userFavoriteRecipes->add($userFavoriteRecipe);
+            $userFavoriteRecipe->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserFavoriteRecipe(UserFavoriteRecipe $userFavoriteRecipe): static
+    {
+        if ($this->userFavoriteRecipes->removeElement($userFavoriteRecipe)) {
+            // set the owning side to null (unless already changed)
+            if ($userFavoriteRecipe->getUser() === $this) {
+                $userFavoriteRecipe->setUser(null);
+            }
+        }
 
         return $this;
     }

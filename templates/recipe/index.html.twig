@@ -31,7 +31,14 @@
             <div class="recipe" style="background-image: url('{{ recipe[0].recipeImage[0] is defined ? recipe[0].recipeImage[0] : 'https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg' }}')">
                 
                 <div class="recipe-like">
-                    Like
+                    {# Permet de déterminer si l'utilisateur a mis en favoris la recette ou non #}
+                    {% if(app.user) %}
+                        {% if recipe['isFavorite'] is defined and recipe['isFavorite'] == true %}
+                            Liked
+                        {% else %}
+                            Not liked
+                        {% endif %}
+                    {% endif %}
                 </div>
                 
                 <div class="recipe-content">

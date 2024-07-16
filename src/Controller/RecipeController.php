@@ -23,8 +23,8 @@ class RecipeController extends AbstractController
     public function index(RecipeRepository $recipeRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $pagination = $paginator->paginate(
-            $recipeRepository->findAllWithRating(), /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
+            $recipeRepository->findAllWithRating($this->getUser()), /* query NOT result */
+            $request->query->getInt('page', 1), /*page number*/ 
             9 /*limit per page*/
         );
 

@@ -62,6 +62,12 @@ class Recipe
     #[ORM\OneToMany(targetEntity: RecipeImage::class, mappedBy: 'recipe')]
     private Collection $recipeImage;
 
+    /**
+     * @var Collection<int, UserFavoriteRecipe>
+     */
+    #[ORM\OneToMany(targetEntity: UserFavoriteRecipe::class, mappedBy: 'recipe', orphanRemoval: true)]
+    private Collection $userFavoriteRecipes;
+
     public function __construct()
     {
         $this->recipeUstensils = new ArrayCollection();
@@ -69,6 +75,7 @@ class Recipe
         $this->recipeIngredients = new ArrayCollection();
         $this->comments = new ArrayCollection();
         $this->recipeImage = new ArrayCollection();
+        $this->userFavoriteRecipes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -280,6 +287,36 @@ class Recipe
             // set the owning side to null (unless already changed)
             if ($recipeImage->getRecipe() === $this) {
                 $recipeImage->setRecipe(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserFavoriteRecipe>
+     */
+    public function getUserFavoriteRecipes(): Collection
+    {
+        return $this->userFavoriteRecipes;
+    }
+
+    public function addUserFavoriteRecipe(UserFavoriteRecipe $userFavoriteRecipe): static
+    {
+        if (!$this->userFavoriteRecipes->contains($userFavoriteRecipe)) {
+            $this->userFavoriteRecipes->add($userFavoriteRecipe);
+            $userFavoriteRecipe->setRecipe($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserFavoriteRecipe(UserFavoriteRecipe $userFavoriteRecipe): static
+    {
+        if ($this->userFavoriteRecipes->removeElement($userFavoriteRecipe)) {
+            // set the owning side to null (unless already changed)
+            if ($userFavoriteRecipe->getRecipe() === $this) {
+                $userFavoriteRecipe->setRecipe(null);
             }
         }
 
