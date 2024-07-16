@@ -36,7 +36,14 @@
                 
                 <div class="recipe-content">
                     <span>{{ recipe[0].name }}</span>
-                    <div>{{ recipe['avg_rating'] }}</div>
+                    <div>
+                        <div class="rating-stars-wrapper">
+                            <img class="rating-stars rating-stars-empty" src="{{ asset('images/stars/stars_empty.png') }}" alt="rating stars empty" />
+                            <img style="clip-path: inset(0 {{ 100 - (recipe['avg_rating'] *2 *10) }}% 0 0);" class="rating-stars rating-stars-full" src="{{ asset('images/stars/stars_full.png') }}"  alt="rating stars full" />
+                        </div>
+
+                        <span>{{ recipe['avg_rating'] }}/5</span>
+                    </div>
                     <div><a href="#">{{ recipe['count_rating'] }} avis</a></div>
                 </div>
                 

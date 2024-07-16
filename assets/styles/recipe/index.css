@@ -25,11 +25,23 @@
   background: rgba(0, 0, 0, 0.6);
   width: fit-content;
 }
+#recipe_wrapper .recipe .recipe-content div:nth-of-type(1) {
+  display: flex;
+  gap: 6px;
+}
 #recipe_wrapper .recipe .recipe-content span:nth-of-type(1) {
   font-weight: bold;
 }
 #recipe_wrapper .recipe .recipe-content a:nth-of-type(1) {
   color: white;
+}
+#recipe_wrapper .rating-stars-wrapper {
+  width: 100px;
+  position: relative;
+}
+#recipe_wrapper .rating-stars-wrapper .rating-stars {
+  position: absolute;
+  width: 100%;
 }
 #recipe_wrapper .recipe-like {
   display: flex;

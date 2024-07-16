@@ -27,6 +27,11 @@
             background: rgba(0, 0, 0, 0.6);
             width: fit-content;
 
+            div:nth-of-type(1) {
+                display: flex;
+                gap: 6px;
+            }
+
             span:nth-of-type(1) {
                 font-weight: bold;
             }
@@ -34,6 +39,17 @@
             a:nth-of-type(1) {
                 color: white;
             }
+        }
+    }
+
+    .rating-stars-wrapper
+    {
+        width: 100px;
+        position: relative;
+
+        .rating-stars{
+            position: absolute;
+            width: 100%;
         }
     }
 
