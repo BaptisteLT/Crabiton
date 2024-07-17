@@ -22,8 +22,6 @@
                 {{ knp_pagination_sortable(pagination, 'Name', 'r.name') }}
             </th>
         </tr>
-
-        
     </table>
 
     <div id="recipe_wrapper">
@@ -33,11 +31,13 @@
                 <div class="recipe-like">
                     {# Permet de déterminer si l'utilisateur a mis en favoris la recette ou non #}
                     {% if(app.user) %}
-                        {% if recipe['isFavorite'] is defined and recipe['isFavorite'] == true %}
-                            Liked
-                        {% else %}
-                            Not liked
-                        {% endif %}
+                        <button id="recipe-{{recipe[0].id}}" onClick="setOrUnsetFavorite({{recipe[0].id}}, '{{ csrf_token('favoriteRecipe') }}')">
+                            {% if recipe['isFavorite'] is defined and recipe['isFavorite'] == true %}
+                                Liked
+                            {% else %}
+                                Not liked
+                            {% endif %}
+                        </button>
                     {% endif %}
                 </div>
                 
@@ -63,4 +63,8 @@
         {{ knp_pagination_render(pagination) }}
     </div>
 </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script type="text/javascript" src="{{ asset('js/recipe/favorite_recipe.js') }}"></script>
 {% endblock %}

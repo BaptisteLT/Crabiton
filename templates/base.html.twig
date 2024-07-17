@@ -12,14 +12,16 @@
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
         {% block stylesheets %}
         {% endblock %}
-
-        {% block javascripts %}
-            {% block importmap %}{{ importmap('app') }}{% endblock %}
-        {% endblock %}
     </head>
     <body>
         {% block body %}
             
+        {% endblock %}
+
+        {% block importmap %}{{ importmap('app') }}{% endblock %}
+        
+        {% block javascripts %}
+           
         {% endblock %}
     </body>
 </html>
