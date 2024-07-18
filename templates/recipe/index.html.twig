@@ -31,13 +31,10 @@
                 <div class="recipe-like">
                     {# Permet de déterminer si l'utilisateur a mis en favoris la recette ou non #}
                     {% if(app.user) %}
-                        <button id="recipe-{{recipe[0].id}}" onClick="setOrUnsetFavorite({{recipe[0].id}}, '{{ csrf_token('favoriteRecipe') }}')">
-                            {% if recipe['isFavorite'] is defined and recipe['isFavorite'] == true %}
-                                Liked
-                            {% else %}
-                                Not liked
-                            {% endif %}
-                        </button>
+                        <div class="recipe-favorite-btn" id="recipe-{{recipe[0].id}}" onClick="setOrUnsetFavorite({{recipe[0].id}}, '{{ csrf_token('favoriteRecipe') }}')">
+                            <img  id="recipe-like-icon-{{ recipe[0].id }}" class="recipe-favorite-btn-icon {{recipe['isFavorite'] is defined and recipe['isFavorite'] == false ? "hide"}}" src="{{ asset('images/button/favorite/liked.png') }}" alt="like icon" />
+                            <img id="recipe-not-liked-icon-{{ recipe[0].id }}" class="recipe-favorite-btn-icon {{recipe['isFavorite'] is defined and recipe['isFavorite'] == true ? "hide"}}" src="{{ asset('images/button/favorite/not_liked.png') }}" alt="like icon" />
+                        </div>
                     {% endif %}
                 </div>
                 

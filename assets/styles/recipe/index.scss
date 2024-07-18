@@ -58,6 +58,29 @@
         display: flex;
         justify-content: end;
     }
+
+    .recipe-favorite-btn
+    {
+        width: 36px;
+        height: 36px;
+        background: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        position: relative;
+
+        .recipe-favorite-btn-icon
+        {
+            width: 56%;
+            position: absolute;
+        }
+
+        .hide{
+            display: none;
+        }
+    }
 }
 
 
