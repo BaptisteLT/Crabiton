@@ -7,9 +7,15 @@
         <a href="{{ path('app_index') }}">Crabiton</a>
     </div>
 
+    {% set searchForm = search_form() %}
+
     {# Render the form in the header #}
-    {{ form_start(search_form(), {'attr': {'action': path('app_index'), 'method': 'GET'}}) }}
-    {{ form_end(search_form()) }}
+    {{ form_start(searchForm, {'method': 'GET', 'attr': {'action': path('app_index')}}) }}
+        {{ form_widget(searchForm.search) }}
+        <button class="searchBtn" type="submit">
+            <img src="{{ asset('images/button/search/loupe.png') }}" alt="logo d'une loupe">
+        </button>
+    {{ form_end(searchForm) }}
 
     <div>
         {% if app.user is null %}

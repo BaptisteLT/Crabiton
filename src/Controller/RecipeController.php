@@ -25,7 +25,7 @@ use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 class RecipeController extends AbstractController
 {
-    #[Route('/', name: 'app_index')]
+    #[Route('/', name: 'app_index', methods: ['get'])]
     public function index(RecipeRepository $recipeRepository, PaginatorInterface $paginator, Request $request): Response
     {
         $search = $request->get('search_recipe')['search'] ?? null;
