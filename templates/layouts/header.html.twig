@@ -7,6 +7,10 @@
         <a href="{{ path('app_index') }}">Crabiton</a>
     </div>
 
+    {# Render the form in the header #}
+    {{ form_start(search_form(), {'attr': {'action': path('app_index'), 'method': 'GET'}}) }}
+    {{ form_end(search_form()) }}
+
     <div>
         {% if app.user is null %}
             <a href="{{ path('app_login') }}">Sign in</a>

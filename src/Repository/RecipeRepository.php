@@ -17,7 +17,7 @@ class RecipeRepository extends ServiceEntityRepository
         parent::__construct($registry, Recipe::class);
     }
 
-       public function findAllWithRating(?User $user)
+       public function searchWithRating(?User $user, $search)
        {
             $query = $this->createQueryBuilder('r')
                 ->addSelect('avg(comments.rating) as avg_rating')
@@ -32,6 +32,12 @@ class RecipeRepository extends ServiceEntityRepository
                     ->setParameter('user', $user->getId());
                 }
                 
+                if($search)
+                {
+                    $query->where('r.name LIKE :search')
+                    ->setParameter('search', '%'.$search.'%');
+                }
+
                 $query->groupBy('r.id')
                 ->leftJoin('r.comments', 'comments')
                 ->orderBy('r.id', 'ASC')

@@ -28,8 +28,10 @@ class RecipeController extends AbstractController
     #[Route('/', name: 'app_index')]
     public function index(RecipeRepository $recipeRepository, PaginatorInterface $paginator, Request $request): Response
     {
+        $search = $request->get('search_recipe')['search'] ?? null;
+
         $pagination = $paginator->paginate(
-            $recipeRepository->findAllWithRating($this->getUser()), /* query NOT result */
+            $recipeRepository->searchWithRating($this->getUser(), $search), /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/ 
             9 /*limit per page*/
         );
